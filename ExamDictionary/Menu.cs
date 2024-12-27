@@ -42,12 +42,12 @@ namespace ExamDictionary
                     case 4:
                         EditWord();
                         break;
-                    case 5:
-                        EditTranslations();
-                        break;
-                    case 6:
-                        EditWordAndTranslations();
-                        break;
+                    //case 5:
+                    //    EditTranslations();
+                    //    break;
+                    //case 6:
+                    //    EditWordAndTranslations();
+                    //    break;
                     case 7:
                         DeleteDictionary();
                         break;
