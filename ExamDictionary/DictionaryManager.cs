@@ -57,15 +57,15 @@ namespace ExamDictionary
             using FileStream fstream = File.Create(path);
             fstream.Write(bytes, 0, bytes.Length);
         }
-        public static string Load(string path)
-        {
-            ArgumentNullException.ThrowIfNull(path);
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException(path);
-            }
-            return File.ReadAllText(path);
-        }
+        //public static string Load(string path)
+        //{
+        //    ArgumentNullException.ThrowIfNull(path);
+        //    if (!File.Exists(path))
+        //    {
+        //        throw new FileNotFoundException(path);
+        //    }
+        //    return File.ReadAllText(path);
+        //}
         public static LanguageDictionary Deserialize(string json)
         {
             ArgumentNullException.ThrowIfNull(json);
