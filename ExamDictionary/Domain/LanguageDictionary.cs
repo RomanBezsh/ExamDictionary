@@ -9,53 +9,53 @@ namespace ExamDictionary.Domain
 {
     public class LanguageDictionary
     {
-        public string? TypeTranslation { get; set; }
-        private List<Word> _words = new List<Word>();
-        public void AddWord(string? word, List<string> translations)
-        {
-            ArgumentNullException.ThrowIfNull(word, nameof(word));
-            ArgumentNullException.ThrowIfNull(translations, nameof(translations));
-            if (translations.Count == 0)
+        public string TypeTranslation { get; set; }
+        public List<Word> Words  { get; set; } = new List<Word>();
+        public void AddWord(string word, List<string> translations)
             {
-                throw new ArgumentException("Должен быть хотя бы один перевод");
+                if (translations.Count == 0)
+                {
+                    throw new Exception("Должен быть хотя бы один перевод");
+                }
+                var exsistWord = Words.FirstOrDefault(w => w.Text == word);
+                if (exsistWord == null)
+                {
+                    Words.Add(new Word { Text = word, Translations = translations });
+                }
+                else
+                {
+                    throw new Exception("Это слово уже есть в словаре.\n");
+                }
             }
-            var exsistWord = _words.FirstOrDefault(w => w.Text == word);
-            if (exsistWord == null)
-            {
-                _words.Add(new Word { Text = word, Translations = translations });
-            }
-            else
-            {
-                throw new ArgumentException("Это слово уже есть в словаре.\n");
-            }
-        }
         public void DeleteWord(string word)
         {
-            var exsistWord = _words.FirstOrDefault(w => w.Text == word);
+            var exsistWord = Words.FirstOrDefault(w => w.Text == word);
             if (exsistWord != null)
             {
-                _words.Remove(exsistWord);
+                Words.Remove(exsistWord);
             }
         }
-        public void EditWord(string? word, string? newWord)
+        public void DeleteTranslation(string word, string translation)
         {
-            ArgumentNullException.ThrowIfNull(word, nameof(word));
-            ArgumentNullException.ThrowIfNull(newWord, nameof(newWord));
-
-            var exsistWord = _words.FirstOrDefault(w => w.Text == word);
+            var exsistWord = Words.FirstOrDefault(w => w.Text == word);
+            if (exsistWord != null)
+            {
+                exsistWord.Translations.Remove(translation);
+            }
+        }
+        public void EditWord(string word, string newWord)
+        {
+            var exsistWord = Words.FirstOrDefault(w => w.Text == word);
             if (exsistWord != null)
             {
                 var temp = exsistWord.Translations;
-                _words.Remove(exsistWord);
-                _words.Add(new Word() { Text = newWord, Translations = temp });
+                Words.Remove(exsistWord);
+                Words.Add(new Word() { Text = newWord, Translations = temp });
             }
         }
         public void EditTranslations(string word, List<string> newTranslations)
         {
-            ArgumentNullException.ThrowIfNull(word, nameof(word));
-            ArgumentNullException.ThrowIfNull(newTranslations, nameof(newTranslations));
-
-            var exsistWord = _words.FirstOrDefault(w => w.Text == word);
+            var exsistWord = Words.FirstOrDefault(w => w.Text == word);
             if (exsistWord != null)
             {
                 exsistWord.Translations = newTranslations;
@@ -63,19 +63,16 @@ namespace ExamDictionary.Domain
         }
         public void EditWordAndTranslations(string word, string newWord, List<string> newTranslations)
         {
-            ArgumentNullException.ThrowIfNull(word, nameof(word));
-            ArgumentNullException.ThrowIfNull(newWord, nameof(newWord));
-
-            var exsistWord = _words.FirstOrDefault(w => w.Text == word);
+            var exsistWord = Words.FirstOrDefault(w => w.Text == word);
             if (exsistWord != null)
             {
-                _words.Remove(exsistWord);
-                _words.Add(new Word() { Text = newWord, Translations = newTranslations });
+                Words.Remove(exsistWord);
+                Words.Add(new Word() { Text = newWord, Translations = newTranslations });
             }
         }
         public Word? FindWord(string text)
         {
-            return _words.FirstOrDefault(w => w.Text == text);
+            return Words.FirstOrDefault(w => w.Text == text);
         }
     }
 }

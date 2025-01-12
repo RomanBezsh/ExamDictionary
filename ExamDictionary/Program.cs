@@ -1,3 +1,4 @@
-﻿using ExamDictionary;
+﻿using ExamDictionary.UI;
 
-Menu.ShowMainMenu();
+Menu nemu = new Menu();
+nemu.ShowMainMenu();

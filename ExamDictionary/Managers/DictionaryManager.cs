@@ -8,7 +8,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ExamDictionary
+namespace ExamDictionary.Managers
 {
     public static class DictionariesManager
     {
@@ -44,33 +44,7 @@ namespace ExamDictionary
         }
 
 
-        public static string Serialize(LanguageDictionary dictionary)
-        {
-            ArgumentNullException.ThrowIfNull(dictionary);
-            return JsonSerializer.Serialize(dictionary) ?? throw new JsonException("Serialize error");
-        }
-        public static void Save(string json, string path)
-        {
-            ArgumentNullException.ThrowIfNull(json);
-            ArgumentNullException.ThrowIfNull(path);
-            byte[] bytes = Encoding.UTF8.GetBytes(json);
-            using FileStream fstream = File.Create(path);
-            fstream.Write(bytes, 0, bytes.Length);
-        }
-        public static string Load(string path)
-        {
-            ArgumentNullException.ThrowIfNull(path);
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException(path);
-            }
-            return File.ReadAllText(path);
-        }
-        public static LanguageDictionary Deserialize(string json)
-        {
-            ArgumentNullException.ThrowIfNull(json);
-            return JsonSerializer.Deserialize<LanguageDictionary>(json) ?? throw new JsonException("Deserialize error");
-        }
+        
 
 
     }

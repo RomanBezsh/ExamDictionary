@@ -8,7 +8,7 @@ namespace ExamDictionary.Domain
 {
     public class Word
     {
-        public string? Text { get; set; }
-        public List<string>? Translations { get; set; }
+        public string Text { get; set; }
+        public List<string> Translations { get; set; }
     }
 }
