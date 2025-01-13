@@ -1,4 +1,4 @@
 ﻿using ExamDictionary.UI;
 
-Menu nemu = new Menu();
+UI nemu = new UI();
 nemu.ShowMainMenu();

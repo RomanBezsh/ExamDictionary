@@ -8,7 +8,7 @@ using ExamDictionary.Domain;
 using ExamDictionary.Managers;
 namespace ExamDictionary.UI
 {
-    internal class Menu
+    internal class UI
     {
         private LanguageDictionary _currentDictionary;
 
@@ -58,11 +58,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите тип словаря: ");
+                    Console.WriteLine("Введите тип словаря (оставьте поле пустым для выхода): ");
                     var type = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(type))
                     {
-                        throw new Exception("Тип словаря не может быть пустым. Нажмите любую клавишу, чтобы вернуться в главное меню.");
+                        break;
                     }
                     _currentDictionary = DictionariesManager.FindDictionary(type);
                     if (_currentDictionary != null)
@@ -205,11 +205,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово, которое хотите удалить: ");
+                    Console.WriteLine("Введите слово, которое хотите удалить (оставьте поле пустым для выхода): ");
                     var word = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(word))
                     {
-                        throw new Exception("Слово не может быть пустым.");
+                        break;
                     }
                     _currentDictionary.DeleteWord(word);
                     Console.WriteLine("Слово было успешно удалено.");
@@ -233,17 +233,17 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово для удаления перевода:");
+                    Console.WriteLine("Введите слово для удаления перевода (оставьте поле пустым для выхода):");
                     var word = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(word))
                     {
-                        throw new Exception("Слово не может быть пустым.");
+                        break;
                     }
-                    Console.WriteLine("Введите перевод для удаления:");
+                    Console.WriteLine("Введите перевод для удаления (оставьте поле пустым для выхода):");
                     var translation = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(translation))
                     {
-                        throw new Exception("Перевод не может быть пустым.");
+                        break;
                     }
                     _currentDictionary.DeleteTranslation(word, translation);
                     Console.WriteLine("Перевод был успешно удален.");
@@ -265,11 +265,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово, которое хотите изменить: ");
+                    Console.WriteLine("Введите слово, которое хотите изменить (оставьте поле пустым для выхода): ");
                     var oldWord = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(oldWord))
                     {
-                        throw new Exception("Старое слово не может быть пустым.");
+                        break;
                     }
                     Console.Write("Введите новое слово: ");
                     var newWord = Console.ReadLine();
@@ -299,11 +299,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово, для которого хотите изменить перевод: ");
+                    Console.WriteLine("Введите слово, для которого хотите изменить перевод (оставьте поле пустым для выхода): ");
                     var word = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(word))
                     {
-                        throw new Exception("Слово не может быть пустым.");
+                        break;
                     }
                     Console.Write("Введите новый перевод (если вы желаете несколько вариантов перевода ввести, то после каждого варианта пишите ,): ");
                     var newTranslations = Console.ReadLine().Split(',').ToList();
@@ -332,11 +332,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово, которое хотите изменить: ");
+                    Console.WriteLine("Введите слово, которое хотите изменить (оставьте поле пустым для выхода): ");
                     var oldWord = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(oldWord))
                     {
-                        throw new Exception("Старое слово не может быть пустым.");
+                        break;
                     }
                     Console.Write("Введите новое слово: ");
                     var newWord = Console.ReadLine();
@@ -380,11 +380,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите слово, для которого хотите найти перевод: ");
+                    Console.WriteLine("Введите слово, для которого хотите найти перевод ( или оставьте поле пустым для выхода): ");
                     var word = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(word))
                     {
-                        throw new Exception("Слово не может быть пустым.");
+                        break;
                     }
                     var foundWord = _currentDictionary.FindWord(word);
                     foreach (var translation in foundWord.Translations)
@@ -411,11 +411,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите путь для сохранения словаря: ");
+                    Console.WriteLine("Введите путь для сохранения словаря ( или оставьте поле пустым для выхода): ");
                     var path = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        throw new Exception("Путь не может быть пустым.");
+                        break;
                     }
                     FileManager.Save(_currentDictionary, path);
                     Console.WriteLine("Словарь был успешно сохранен.");
@@ -439,11 +439,11 @@ namespace ExamDictionary.UI
                 try
                 {
                     Console.Clear();
-                    Console.WriteLine("Введите путь к файлу: ");
+                    Console.WriteLine("Введите путь к файлу ( или оставьте поле пустым для выхода): ");
                     var path = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        throw new Exception("Путь не может быть пустым.");
+                        break;
                     }
                     var dictionary = FileManager.Load(path);
                     if (DictionariesManager.FindDictionary(dictionary.TypeTranslation) != null)
