@@ -10,10 +10,9 @@ using System.Xml.Linq;
 
 namespace ExamDictionary.Managers
 {
-    public static class DictionariesManager
+    internal static class DictionariesManager
     {
         public static List<LanguageDictionary> _dictionaries = new List<LanguageDictionary>();
-
         public static void AddDictionary(LanguageDictionary dictionary)
         {
             var existDictionary = _dictionaries.FirstOrDefault(w => w.TypeTranslation == dictionary.TypeTranslation);
@@ -34,18 +33,9 @@ namespace ExamDictionary.Managers
                 _dictionaries.Remove(dictionary);
             }
         }
-        public static List<LanguageDictionary> GetDictionaries()
-        {
-            return _dictionaries;
-        }
         public static LanguageDictionary? FindDictionary(string type)
         {
             return _dictionaries.FirstOrDefault(d => d.TypeTranslation == type);
         }
-
-
-        
-
-
     }
 }
